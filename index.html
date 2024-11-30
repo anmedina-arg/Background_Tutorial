@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link href="./styles.css" rel="stylesheet" />
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link
+		href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+		rel="stylesheet">
+	<title>Background effects</title>
+</head>
+
+<body>
+	<h1>Backgrounds</h1>
+	<section>
+		<p>La idea de este documento es generar un documento que nos permita profundizar en el estudio y aprendizaje de
+			la generacion de imagenes con CSS, en este caso, con la propiedad background.</p>
+		<p>Para ello vamos a analizar detalladamente los pasos a seguir para generar esta imagen:</P>
+		<div class="card"></div>
+	</section>
+	<section>
+		<p>Para lograrlo vamos a utilizar la fusión en la superposicion de 3 capas junto con los pseudoelementos "after"
+			y "before"</p>
+		<div class="text-with-card">
+			<span>Esta capa que tiene una composición y corresponde al pseudoelemento ":before" de la clase:
+				".card"</span>
+			<div class='bg2'></div>
+		</div>
+
+		<div class="text-with-card">
+			<span>Esta capa solo tiene un gradiente y coreresponde al div con clase: ".card"</span>
+			<div class='bg1'></div>
+		</div>
+
+		<div class="text-with-card">
+			<span>Y esta tercer capa que tiene un gradiente, corresponde al pseudoelemento ":after" de la clase
+				".card":</span>
+			<div class='bg3'></div>
+		</div>
+	</section>
+	<section>
+		<h3>Analisis del background de la clase ".card:before"</h3>
+		<div class="cards-row">
+			<div class='bg21'></div>
+			<span>+</span>
+			<div class='bg22'></div>
+			<span>=</span>
+			<div class='bg23'></div>
+			<span> filter: contrast(20) -></span>
+			<div class='bg2'></div>
+		</div>
+		<p>Para lograr este efecto, debemos entender el concepto de trabajar por capas y utilizamos propiedades CSS de
+			fución de capas (background-blend-mode) y luego propiedades de filtros (filter) </p>
+		<ol>
+
+			<li>La primer capa que creamos es un background con un patron de líneas repetidas
+				<code>backround: repeating-linear-gradient(45deg, #000, #999, #000 5%)</code>
+			<li>La segunda capa que creamos, es simplemente un gradiente:
+				<code>background: linear-gradient(45deg, #777, #000);</code>
+			</li>
+			<li>Luego generamos una fusión entre ambas capas utilizando: <code>background-blend-mode: screen;</code> y
+				obtenemos una fusión entre las dos capas</li>
+			<li>Importante! En este caso solo tenemos 2 (dos) capas, pero si tuvieramos 3 o más, el orden de las capas
+				si afecta a la fusión, es decir, si fusionamos las capas: 1, 2 y 3... podríamos ver una imagen diferente
+				a si fusionamos las capas: 1, 3 y 2</li>
+			<li>Finalmente, para obtener una imagen con líneas bien definidas, utilizamos un filtro de CSS...
+				<code>filter: contrast(20)</code>
+			</li>
+		</ol>
+	</section>
+	<section>
+		<h3>Analisis del background de las clases ".card y .card:after"</h3>
+		<p>Estos backgrounds no requerieren un análisis específico, si mencionar que están utilizando la función de
+			gradientes lineares de CSS</p>
+	</section>
+	<section>
+		<h3>Composición final del patrón de fondo</h3>
+		<p>Antes de comenzar con la fusión de las tres capas, si es importante destacar la posición de cada una de las
+			capas y el rol que cumple cada una</p>
+		<p>Vamos a utilizar propiedades de fusión de CSS y algunas otras</p>
+		<p>Comenzaremos fusionando capa generada con la clase ".card" con la capa generada en la clase ".card:before".
+			Para ello utilizaremos la propiedad: <code>mix-blend-mode: multiply</code> y obtendríamos algo como esto:
+		</p>
+		<div class="mix-before-and-card"></div>
+		<p>Muy bien, continuemos: porque no es aqui donde termina todo... ahora necesitamos fucionar el degradado de la
+			capa generada en ".card:after" con las líneas negras! Para esto vamos a generar la fusión de esa capa! Pero
+			ojo! No es tan simple... porque aqui lo que estamos viendo ya es la interacción de TRES capas! Para lograr
+			esto utilizaremos <code>mix-blend-mode: screen;</code>en el pseudoelemento ":after"</p>
+		<div class="card"></div>
+		<p>Con esto llegamos al final de la composición. Si te ha gustado, te invito a que generes tu propios patrones!
+			Utiliza diferentes valores para las propiedades
+			<code>background-blend-mode</code><code>mix-blend-mode</code><code>filter</code> y juega con los gradientes!
+		</p>
+	</section>
+</body>
+
+</html>
